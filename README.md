@@ -16,4 +16,10 @@ npm install
 node server.js
 ```
 
+3. Run tests
+
+```bash
+npm test
+```
+
 You can browse the apis at <http://localhost:3000>
