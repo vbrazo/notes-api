@@ -83,4 +83,19 @@ describe('Notes', () => {
          });
      });
   });
+
+  describe('/DELETE/:id notes', () => {
+    it('it should DELETE a note given the id', (done) => {
+        let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
+        note.save((err, note) => {
+              chai.request(server)
+              .delete('/notes/' + note.id)
+              .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                done();
+              });
+        });
+    });
+  });
 });
