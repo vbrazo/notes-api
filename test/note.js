@@ -19,7 +19,7 @@ describe('Notes', () => {
         });
     });
 
-  describe('/GET note', () => {
+  describe('/GET notes', () => {
       it('it should GET all the notes', (done) => {
         chai.request(server)
             .get('/notes')
@@ -30,5 +30,22 @@ describe('Notes', () => {
               done();
             });
       });
+  });
+
+  describe('/POST notes', () => {
+    it('it should POST a note', (done) => {
+        let note = {
+            title: "The Lord of the Rings",
+            content: "J.R.R. Tolkien"
+        }
+      chai.request(server)
+          .post('/notes')
+          .send(note)
+          .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+            done();
+          });
+    });
   });
 });
