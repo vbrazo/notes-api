@@ -48,4 +48,23 @@ describe('Notes', () => {
           });
     });
   });
+
+  describe('/GET/:id notes', () => {
+    it('it should GET a note by the given id', (done) => {
+        let note = new Note({ title: "The Lord of the Rings", content: "J.R.R. Tolkien" });
+        note.save((err, note) => {
+            chai.request(server)
+          .get('/notes/' + note.id)
+          .send(note)
+          .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('title');
+                res.body.should.have.property('_id').eql(note.id);
+            done();
+          });
+        });
+
+    });
+  });
 });
