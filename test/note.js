@@ -44,6 +44,8 @@ describe('Notes', () => {
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
+                should.equal(res.body['title'], note['title']);
+                should.equal(res.body['content'], note['content']);
             done();
           });
     });
@@ -62,6 +64,8 @@ describe('Notes', () => {
                   res.body.should.be.a('object');
                   res.body.should.have.property('title');
                   res.body.should.have.property('_id').eql(note.id);
+                  should.equal(res.body['title'], note.title);
+                  should.equal(res.body['content'], note.content);
               done();
             });
           });
@@ -79,6 +83,8 @@ describe('Notes', () => {
                  .end((err, res) => {
                        res.should.have.status(200);
                        res.body.should.be.a('object');
+                       should.equal(res.body['title'], "The Chronicles of Narnia");
+                       should.equal(res.body['content'], "C.S.");
                    done();
                  });
            });
@@ -93,7 +99,6 @@ describe('Notes', () => {
                 .delete('/notes/' + note.id)
                 .end((err, res) => {
                       res.should.have.status(200);
-                      res.body.should.be.a('object');
                   done();
                 });
           });

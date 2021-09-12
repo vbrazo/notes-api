@@ -21,17 +21,20 @@ describe('Users', () => {
 
   describe('/POST users', () => {
     it('it should POST a user', (done) => {
-        let note = {
+        let user = {
             email: "voliveira@gmail.com",
             first_name: "Vitor",
             last_name: "Oliveira"
         }
       chai.request(server)
           .post('/users')
-          .send(note)
+          .send(user)
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
+                should.equal(res.body['email'], user['email']);
+                should.equal(res.body['first_name'], user['first_name']);
+                should.equal(res.body['last_name'], user['last_name']);
             done();
           });
     });
