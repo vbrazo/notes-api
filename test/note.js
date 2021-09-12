@@ -67,4 +67,20 @@ describe('Notes', () => {
 
     });
   });
+
+  describe('/PUT/:id notes', () => {
+     it('it should UPDATE a note given the id', (done) => {
+         let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
+         note.save((err, note) => {
+               chai.request(server)
+               .put('/notes/' + note.id)
+               .send({title: "The Chronicles of Narnia", content: "C.S."})
+               .end((err, res) => {
+                     res.should.have.status(200);
+                     res.body.should.be.a('object');
+                 done();
+               });
+         });
+     });
+  });
 });
