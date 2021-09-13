@@ -6,6 +6,7 @@ let Note = require("../app/models/note.js");
 //Require the dev-dependencies
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+var faker = require('faker');
 let server = require("../server");
 let should = chai.should();
 
@@ -34,8 +35,8 @@ describe("Notes", () => {
   describe("POST /notes", () => {
     it("it should POST a note", (done) => {
       let note = {
-          title: "The Lord of the Rings",
-          content: "J.R.R. Tolkien"
+          title: faker.lorem.word(),
+          content: faker.lorem.word()
       };
 
       chai.request(server)
@@ -54,8 +55,8 @@ describe("Notes", () => {
   describe("GET /note/:id", () => {
     it("it should GET a note by the given id", (done) => {
         let note = new Note({
-          title: "The Lord of the Rings",
-          content: "J.R.R. Tolkien"
+          title: faker.lorem.word(),
+          content: faker.lorem.word()
         });
 
         note.save((err, note) => {
@@ -78,8 +79,8 @@ describe("Notes", () => {
   describe("PUT /note/:id", () => {
      it("it should UPDATE a note given the id", (done) => {
          let note = new Note({
-           title: "The Chronicles of Narnia",
-           content: "C.S. Lewis"
+           title: faker.lorem.word(),
+           content: faker.lorem.word()
          });
 
          note.save((err, note) => {
@@ -103,8 +104,8 @@ describe("Notes", () => {
   describe("DELETE /note/:id", () => {
     it("it should DELETE a note given the id", (done) => {
         let note = new Note({
-          title: "The Chronicles of Narnia",
-          content: "C.S. Lewis"
+          title: faker.lorem.word(),
+          content: faker.lorem.word()
         });
 
         note.save((err, note) => {
