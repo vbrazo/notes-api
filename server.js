@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 
 // Require Notes routes
 require('./app/routes/note.routes.js')(app);
+require('./app/routes/user.routes.js')(app);
 
 function listRoutes(routes, stack, parent){
   parent = parent || '';
@@ -52,6 +53,7 @@ function listRoutes(routes, stack, parent){
         return listRoutes(routes, r.handle.stack, parent + routerName);
       }
     });
+
     return routes;
   } else {
     return listRoutes([], app._router.stack);

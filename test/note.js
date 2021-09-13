@@ -44,58 +44,64 @@ describe('Notes', () => {
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
+                should.equal(res.body['title'], note['title']);
+                should.equal(res.body['content'], note['content']);
             done();
           });
     });
   });
 
-  describe('/GET/:id notes', () => {
-    it('it should GET a note by the given id', (done) => {
-        let note = new Note({ title: "The Lord of the Rings", content: "J.R.R. Tolkien" });
-        note.save((err, note) => {
-            chai.request(server)
-          .get('/notes/' + note.id)
-          .send(note)
-          .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('title');
-                res.body.should.have.property('_id').eql(note.id);
-            done();
-          });
-        });
 
-    });
-  });
-
-  describe('/PUT/:id notes', () => {
-     it('it should UPDATE a note given the id', (done) => {
-         let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
-         note.save((err, note) => {
-               chai.request(server)
-               .put('/notes/' + note.id)
-               .send({title: "The Chronicles of Narnia", content: "C.S."})
-               .end((err, res) => {
-                     res.should.have.status(200);
-                     res.body.should.be.a('object');
-                 done();
-               });
-         });
-     });
-  });
-
-  describe('/DELETE/:id notes', () => {
-    it('it should DELETE a note given the id', (done) => {
-        let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
-        note.save((err, note) => {
+    describe('/GET/:id note', () => {
+      it('it should GET a note by the given id', (done) => {
+          let note = new Note({ title: "The Lord of the Rings", content: "J.R.R. Tolkien" });
+          note.save((err, note) => {
               chai.request(server)
-              .delete('/notes/' + note.id)
-              .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                done();
-              });
-        });
+            .get('/notes/' + note.id)
+            .send(note)
+            .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.a('object');
+                  res.body.should.have.property('title');
+                  res.body.should.have.property('_id').eql(note.id);
+                  should.equal(res.body['title'], note.title);
+                  should.equal(res.body['content'], note.content);
+              done();
+            });
+          });
+
+      });
     });
-  });
+
+    describe('/PUT/:id note', () => {
+       it('it should UPDATE a note given the id', (done) => {
+           let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
+           note.save((err, note) => {
+                 chai.request(server)
+                 .put('/notes/' + note.id)
+                 .send({title: "The Chronicles of Narnia", content: "C.S."})
+                 .end((err, res) => {
+                       res.should.have.status(200);
+                       res.body.should.be.a('object');
+                       should.equal(res.body['title'], "The Chronicles of Narnia");
+                       should.equal(res.body['content'], "C.S.");
+                   done();
+                 });
+           });
+       });
+    });
+
+    describe('/DELETE/:id note', () => {
+      it('it should DELETE a note given the id', (done) => {
+          let note = new Note({title: "The Chronicles of Narnia", content: "C.S. Lewis"})
+          note.save((err, note) => {
+                chai.request(server)
+                .delete('/notes/' + note.id)
+                .end((err, res) => {
+                      res.should.have.status(200);
+                  done();
+                });
+          });
+      });
+    });
 });
