@@ -6,6 +6,7 @@ let User = require("../app/models/user.js");
 //Require the dev-dependencies
 let chai = require("chai");
 let chaiHttp = require("chai-http");
+var faker = require('faker');
 let server = require("../server");
 let should = chai.should();
 
@@ -34,9 +35,9 @@ describe("Users", () => {
   describe("POST /users", () => {
     it("it should POST a user", (done) => {
       let user = {
-          email: "voliveira@gmail.com",
-          first_name: "Vitor",
-          last_name: "Oliveira"
+          email: faker.internet.email(),
+          first_name: faker.name.findName(),
+          last_name: faker.name.findName()
       };
 
       chai.request(server)
@@ -56,8 +57,8 @@ describe("Users", () => {
   describe("GET /users/:id", () => {
     it("it should GET a user by the given id", (done) => {
         let user = new User({
-          first_name: "The Lord of the Rings",
-          last_name: "J.R.R. Tolkien"
+          first_name: faker.name.findName(),
+          last_name: faker.name.findName()
         });
 
         user.save((err, user) => {
@@ -81,23 +82,23 @@ describe("Users", () => {
   describe("PUT /users/:id", () => {
      it("it should UPDATE a user given the id", (done) => {
          let user = new User({
-           first_name: "The Chronicles of Narnia",
-           last_name: "C.S. Lewis"
+           first_name: faker.name.findName(),
+           last_name: faker.name.findName()
          });
 
          user.save((err, user) => {
                chai.request(server)
                .put("/users/" + user.id)
                .send({
-                 first_name: "The Chronicles of Narnia",
-                 last_name: "C.S."
+                 first_name: "George",
+                 last_name: "Clinton"
                })
                .end((err, res) => {
                      res.should.have.status(200);
                      res.body.should.be.a("object");
                      should.equal(res.body["email"], user.email);
-                     should.equal(res.body["first_name"], "The Chronicles of Narnia");
-                     should.equal(res.body["last_name"], "C.S.");
+                     should.equal(res.body["first_name"], "George");
+                     should.equal(res.body["last_name"], "Clinton");
                  done();
                });
          });
