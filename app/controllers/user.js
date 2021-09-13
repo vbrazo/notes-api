@@ -1,4 +1,4 @@
-const User = require("../models/user.model.js");
+const User = require("../models/user.js");
 
 exports.create = (req, res) => {
     if(!req.body.email) {

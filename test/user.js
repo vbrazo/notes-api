@@ -1,7 +1,7 @@
 //During the test the env variable is set to test
 process.env.NODE_ENV = "test";
 
-let Note = require("../app/models/user.model.js");
+let Note = require("../app/models/user.js");
 
 //Require the dev-dependencies
 let chai = require("chai");
