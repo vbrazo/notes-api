@@ -18,7 +18,7 @@ describe("Users", () => {
     });
   });
 
-  describe("/GET users", () => {
+  describe("GET /users", () => {
       it("it should GET all the users", (done) => {
         chai.request(server)
             .get("/users")
@@ -31,7 +31,7 @@ describe("Users", () => {
       });
   });
 
-  describe("/POST users", () => {
+  describe("POST /users", () => {
     it("it should POST a user", (done) => {
       let user = {
           email: "voliveira@gmail.com",
@@ -53,7 +53,7 @@ describe("Users", () => {
     });
   });
 
-  describe("/GET/:id user", () => {
+  describe("GET /users/:id", () => {
     it("it should GET a user by the given id", (done) => {
         let user = new User({
           first_name: "The Lord of the Rings",
@@ -78,7 +78,7 @@ describe("Users", () => {
     });
   });
 
-  describe("/PUT/:id user", () => {
+  describe("PUT /users/:id", () => {
      it("it should UPDATE a user given the id", (done) => {
          let user = new User({
            first_name: "The Chronicles of Narnia",
@@ -104,7 +104,7 @@ describe("Users", () => {
      });
   });
 
-  describe("/DELETE/:id user", () => {
+  describe("DELETE /users/:id", () => {
     it("it should DELETE a user given the id", (done) => {
         let user = new User({
           first_name: "The Chronicles of Narnia",
