@@ -1,7 +1,7 @@
 //During the test the env variable is set to test
 process.env.NODE_ENV = "test";
 
-let Note = require("../app/models/note.model.js");
+let Note = require("../app/models/note.js");
 
 //Require the dev-dependencies
 let chai = require("chai");
@@ -18,7 +18,7 @@ describe("Notes", () => {
       });
   });
 
-  describe("/GET notes", () => {
+  describe("GET /notes", () => {
       it("it should GET all the notes", (done) => {
         chai.request(server)
             .get("/notes")
@@ -31,7 +31,7 @@ describe("Notes", () => {
       });
   });
 
-  describe("/POST notes", () => {
+  describe("POST /notes", () => {
     it("it should POST a note", (done) => {
       let note = {
           title: "The Lord of the Rings",
@@ -51,7 +51,7 @@ describe("Notes", () => {
     });
   });
 
-  describe("/GET/:id note", () => {
+  describe("GET /note/:id", () => {
     it("it should GET a note by the given id", (done) => {
         let note = new Note({
           title: "The Lord of the Rings",
@@ -72,11 +72,10 @@ describe("Notes", () => {
             done();
           });
         });
-
     });
   });
 
-  describe("/PUT/:id note", () => {
+  describe("PUT /note/:id", () => {
      it("it should UPDATE a note given the id", (done) => {
          let note = new Note({
            title: "The Chronicles of Narnia",
@@ -101,7 +100,7 @@ describe("Notes", () => {
      });
   });
 
-  describe("/DELETE/:id note", () => {
+  describe("DELETE /note/:id", () => {
     it("it should DELETE a note given the id", (done) => {
         let note = new Note({
           title: "The Chronicles of Narnia",

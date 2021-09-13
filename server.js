@@ -32,8 +32,8 @@ app.get("/", (req, res) => {
 });
 
 // Require Notes routes
-require("./app/routes/note.routes.js")(app);
-require("./app/routes/user.routes.js")(app);
+require("./app/routes/note.js")(app);
+require("./app/routes/user.js")(app);
 
 function listRoutes(routes, stack, parent){
   parent = parent || "";
