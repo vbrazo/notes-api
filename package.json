@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "SET NODE_ENV=dev && node server.js",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "lint": "eslint --fix ."
   },
   "author": "vbrazo",
   "license": "MIT",
